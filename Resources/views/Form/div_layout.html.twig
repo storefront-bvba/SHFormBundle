@@ -60,7 +60,7 @@
 {% block genemu_jquerychosen_widget %}
 {% spaceless %}
     {% set attr = {
-        "data-placeholder": empty_value,
+        "data-placeholder": placeholder,
         "class": "chzn-select"
     }|merge(attr) %}
     {{ block("choice_widget") }}
