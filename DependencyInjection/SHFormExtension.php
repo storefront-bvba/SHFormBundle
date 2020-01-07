@@ -9,6 +9,9 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use SymfonyHackers\Bundle\FormBundle\Form\JQuery\Type\Autocomplete\EntityType;
+use SymfonyHackers\Bundle\FormBundle\Form\JQuery\Type\Autocomplete\TextType;
+use SymfonyHackers\Bundle\FormBundle\Form\JQuery\Type\Autocomplete\DocumentType;
 
 class SHFormExtension extends Extension
 {
@@ -214,11 +217,13 @@ class SHFormExtension extends Extension
     {
         $serviceId = 'genemu.form.jquery.type.autocomplete';
         $textDef = new ChildDefinition($serviceId);
+        $textDef->setClass(TextType::class);
         $textDef->addArgument('text')->addTag('form.type', array('alias' => 'genemu_jqueryautocomplete_text'));
         $container->setDefinition($serviceId . '.text', $textDef);
     
         $doctrineDef = new ChildDefinition($serviceId);
         $doctrineDef
+            ->setClass(EntityType::class)
             ->addArgument('entity')
             ->addArgument(new Reference('doctrine', ContainerInterface::NULL_ON_INVALID_REFERENCE))
             ->addTag('form.type', array('alias' => 'genemu_jqueryautocomplete_entity'))
@@ -227,6 +232,7 @@ class SHFormExtension extends Extension
     
         $mongoDef = new ChildDefinition($serviceId);
         $mongoDef
+            ->setClass(DocumentType::class)
             ->addArgument('document')
             ->addArgument(new Reference('doctrine_mongodb', ContainerInterface::NULL_ON_INVALID_REFERENCE))
             ->addTag('form.type', array('alias' => 'genemu_jqueryautocomplete_document'))
