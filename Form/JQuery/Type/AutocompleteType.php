@@ -6,11 +6,11 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\Util\StringUtil;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\PropertyAccess\PropertyPath;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyPath;
 
 /**
  * @author Bilal Amarni <bilal.amarni@gmail.com>
@@ -41,7 +41,7 @@ class AutocompleteType extends AbstractType
         // Adds a custom block prefix
         array_splice(
             $view->vars['block_prefixes'],
-            array_search($this->getName(), $view->vars['block_prefixes']),
+            array_search($this->getBlockPrefix(), $view->vars['block_prefixes']),
             0,
             'genemu_jqueryautocomplete'
         );
@@ -123,12 +123,14 @@ class AutocompleteType extends AbstractType
     {
         return 'text';
     }
-
+    
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
-        return 'genemu_jqueryautocomplete_' . $this->type;
+        return StringUtil::fqcnToBlockPrefix(self::class) ? StringUtil::fqcnToBlockPrefix(
+                self::class
+            ) . '_' . $this->type : '';
     }
 }
