@@ -4,6 +4,7 @@ namespace SymfonyHackers\Bundle\FormBundle\Twig\Extension;
 
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormRendererInterface;
+use Symfony\Bridge\Twig\Node\SearchAndRenderBlockNode;
 
 /**
  * FormExtension extends Twig with form capabilities.
@@ -34,11 +35,12 @@ class FormExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('form_javascript', array($this, 'renderJavascript'), array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('form_stylesheet', null, array(
-                'is_safe' => array('html'),
-                'node_class' => 'Symfony\Bridge\Twig\Node\SearchAndRenderBlockNode',
-            )),
+            new \Twig_SimpleFunction('form_javascript', [$this, 'renderJavascript'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('form_stylesheet', null, [
+                'is_safe' => ['html'],
+                'node_class' => SearchAndRenderBlockNode::class,
+            ]
+            ),
         );
     }
 
