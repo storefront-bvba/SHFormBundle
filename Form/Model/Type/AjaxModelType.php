@@ -4,7 +4,6 @@ namespace SymfonyHackers\Bundle\FormBundle\Form\Model\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 use SymfonyHackers\Bundle\FormBundle\Form\Model\ChoiceList\AjaxModelChoiceList;
 
@@ -13,7 +12,7 @@ class AjaxModelType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(\Symfony\Component\OptionsResolver\OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'template'          => 'choice',

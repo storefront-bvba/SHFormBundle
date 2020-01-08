@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\\Symfony\Component\OptionsResolver\OptionsResolver;
 
 use SymfonyHackers\Bundle\FormBundle\Form\Core\EventListener\FileListener;
 use SymfonyHackers\Bundle\FormBundle\Form\JQuery\DataTransformer\FileToValueTransformer;
@@ -59,7 +59,7 @@ class FileType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(\Symfony\Component\OptionsResolver\OptionsResolver $resolver)
     {
         $configs = $this->options;
 
