@@ -110,11 +110,10 @@ class TokeninputType extends AbstractType
                 },
                 'configs' => $defaults,
             ))
-            ->setNormalizers(array(
-                'configs' => function (Options $options, $configs) use ($defaults) {
+            ->setNormalizer(
+                'configs', function (Options $options, $configs) use ($defaults) {
                     return array_merge($defaults, $configs);
-                },
-            ))
+                })
         ;
     }
 

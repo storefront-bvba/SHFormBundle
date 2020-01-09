@@ -48,11 +48,10 @@ class ChosenType extends AbstractType
                 'allow_single_deselect' => true,
                 'disable_search_threshold' => 0
             ))
-            ->setNormalizers(array(
-                'expanded' => function (Options $options) {
+            ->setNormalizer(
+                'expanded', function (Options $options) {
                     return false;
-                }
-            ))
+                })
         ;
     }
 

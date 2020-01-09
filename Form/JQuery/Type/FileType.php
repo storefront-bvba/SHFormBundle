@@ -7,7 +7,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\\Symfony\Component\OptionsResolver\OptionsResolver;
 
 use SymfonyHackers\Bundle\FormBundle\Form\Core\EventListener\FileListener;
 use SymfonyHackers\Bundle\FormBundle\Form\JQuery\DataTransformer\FileToValueTransformer;
@@ -70,15 +69,15 @@ class FileType extends AbstractType
                 'multiple' => false,
                 'configs' => array(),
             ))
-            ->setNormalizers(array(
-                'configs' => function (Options $options, $value) use ($configs) {
+            ->setNormalizer(
+                'configs', function (Options $options, $value) use ($configs) {
                     if (!$options['multiple']) {
                         $value['multi'] = false;
                     }
 
                     return array_merge($configs, $value);
                 }
-            ))
+            )
         ;
     }
 
@@ -87,7 +86,7 @@ class FileType extends AbstractType
      */
     public function getParent()
     {
-        return 'file';
+        return \Symfony\Component\Form\Extension\Core\Type\FileType::class;
     }
 
     /**

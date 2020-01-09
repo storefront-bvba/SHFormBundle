@@ -74,16 +74,15 @@ class DateType extends AbstractType
                     'dateFormat' => null,
                 ),
             ))
-            ->setNormalizers(array(
-                'configs' => function (Options $options, $value) use ($configs) {
+            ->setNormalizer(
+                'configs', function (Options $options, $value) use ($configs) {
                     $result = array_merge($configs, $value);
                     if ('single_text' !== $options['widget'] || isset($result['buttonImage'])) {
                         $result['showOn'] = 'button';
                     }
 
                     return $result;
-                }
-            ));
+                });
     }
 
     /**

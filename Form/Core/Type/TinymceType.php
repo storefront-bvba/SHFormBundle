@@ -50,11 +50,10 @@ class TinymceType extends AbstractType
             ->setAllowedTypes(
                 'theme', 'string',
             )
-            ->setNormalizers(array(
-                'configs' => function (Options $options, $value) use ($configs) {
+            ->setNormalizer(
+                'configs', function (Options $options, $value) use ($configs) {
                     return array_merge($configs, $value);
-                },
-            ))
+                })
         ;
     }
 
