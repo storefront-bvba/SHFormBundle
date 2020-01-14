@@ -15,7 +15,7 @@ class FormPass implements CompilerPassInterface
         $resources = $container->getParameter('twig.form.resources');
 
         foreach (array('div', 'jquery', 'stylesheet') as $template) {
-            $resources[] = '@SHForm/Form/' . $template . '_layout.html.twig';
+            $resources[] = '@SHForm/form/' . $template . '_layout.html.twig';
         }
 
         $container->setParameter('twig.form.resources', $resources);
